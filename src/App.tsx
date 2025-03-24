@@ -1,9 +1,8 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Members from "./pages/Members";
 import Subscriptions from "./pages/Subscriptions";
 import Settings from "./pages/Settings";
-
 
 function App() {
   return (
@@ -14,24 +13,53 @@ function App() {
         <nav>
           <ul className="space-y-2">
             <li>
-              <Link to="/" className="block p-3 bg-gray-700 rounded hover:bg-gray-600">
+              <NavLink
+                to="/"
+                // Use a function that returns the appropriate class
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 bg-gray-700 rounded"
+                    : "block p-3 hover:bg-gray-700 rounded"
+                }
+              >
                 🏠 Dashboard
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/members" className="block p-3 hover:bg-gray-700 rounded">
+              <NavLink
+                to="/members"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 bg-gray-700 rounded"
+                    : "block p-3 hover:bg-gray-700 rounded"
+                }
+              >
                 👤 Members
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/subscriptions" className="block p-3 hover:bg-gray-700 rounded">
+              <NavLink
+                to="/subscriptions"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 bg-gray-700 rounded"
+                    : "block p-3 hover:bg-gray-700 rounded"
+                }
+              >
                 💳 Subscriptions
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/settings" className="block p-3 hover:bg-gray-700 rounded">
+              <NavLink
+                to="/settings"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 bg-gray-700 rounded"
+                    : "block p-3 hover:bg-gray-700 rounded"
+                }
+              >
                 ⚙ Settings
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </nav>
