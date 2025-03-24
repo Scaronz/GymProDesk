@@ -114,3 +114,7 @@ button {
     background-color: #0f0f0f69;
   }
 }
+thead {
+  background-color: #1e293b; /* Dark Blue */
+  color: white;
+}

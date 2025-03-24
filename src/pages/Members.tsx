@@ -1,103 +1,106 @@
 import { useState } from "react";
 
-interface Member {
+type Member = {
   id: number;
   name: string;
   email: string;
-}
+};
 
-export default function Members() {
+const Members = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [editId, setEditId] = useState<number | null>(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
 
-  // Add or Update Member
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (editId !== null) {
-      setMembers(
-        members.map((m) => (m.id === editId ? { id: editId, name, email } : m))
-      );
-      setEditId(null);
-    } else {
-      setMembers([...members, { id: Date.now(), name, email }]);
-    }
+  // Add Member
+  const addMember = () => {
+    if (!name || !email) return;
+    const newMember = { id: Date.now(), name, email };
+    setMembers([...members, newMember]);
     setName("");
     setEmail("");
   };
 
   // Edit Member
-  const handleEdit = (member: Member) => {
-    setEditId(member.id);
-    setName(member.name);
-    setEmail(member.email);
+  const editMember = (id: number) => {
+    const member = members.find((m) => m.id === id);
+    if (member) {
+      setName(member.name);
+      setEmail(member.email);
+      setEditingId(id);
+    }
+  };
+
+  // Update Member
+  const updateMember = () => {
+    setMembers(members.map(m => m.id === editingId ? { ...m, name, email } : m));
+    setEditingId(null);
+    setName("");
+    setEmail("");
   };
 
   // Delete Member
-  const handleDelete = (id: number) => {
+  const deleteMember = (id: number) => {
     setMembers(members.filter((m) => m.id !== id));
   };
 
   return (
-    <div className="p-5">
-      <h2 className="text-2xl font-bold mb-4">🏋️ Members Management</h2>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Members Management</h2>
 
-      {/* Add/Edit Form */}
-      <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
+      <div className="mb-4">
         <input
+          className="border p-2 mr-2"
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border p-2 rounded w-1/3"
-          required
         />
         <input
+          className="border p-2 mr-2"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 rounded w-1/3"
-          required
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          {editId ? "Update" : "Add"}
-        </button>
-      </form>
-
-      {/* Members List */}
-      <ul className="border rounded p-4">
-        {members.length === 0 ? (
-          <p>No members yet.</p>
+        {editingId ? (
+          <button className="bg-blue-500 text-white p-2" onClick={updateMember}>
+            Update
+          </button>
         ) : (
-          members.map((m) => (
-            <li
-              key={m.id}
-              className="flex justify-between p-2 border-b last:border-none"
-            >
-              <span>{m.name} ({m.email})</span>
-              <div>
-                <button
-                  onClick={() => handleEdit(m)}
-                  className="bg-yellow-400 px-2 py-1 text-sm rounded mx-1"
-                >
-                  ✏️ Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(m.id)}
-                  className="bg-red-500 text-white px-2 py-1 text-sm rounded"
-                >
-                  🗑 Delete
-                </button>
-              </div>
-            </li>
-          ))
+          <button className="bg-green-500 text-white p-2" onClick={addMember}>
+            Add
+          </button>
         )}
-      </ul>
+      </div>
+
+      <table className="w-full border-collapse border">
+        <thead>
+          <tr >
+            <th className="border p-2">Name</th>
+            <th className="border p-2">Email</th>
+            <th className="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {members.map((member) => (
+            <tr key={member.id} className="border">
+              <td className="border p-2">{member.name}</td>
+              <td className="border p-2">{member.email}</td>
+              <td className="border p-2">
+                <button className="bg-yellow-500 text-white p-1 mr-2" onClick={() => editMember(member.id)}>
+                  Edit
+                </button>
+                <button className="bg-red-500 text-white p-1" onClick={() => deleteMember(member.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
+
+export default Members;
