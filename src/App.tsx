@@ -9,7 +9,7 @@ function App() {
     <div className="flex h-screen bg-gray-900 text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-gray-800 p-5 shadow-lg">
-        <h1 className="text-xl font-bold mb-5">Gym Dashboard</h1>
+        <h1 className="text-xl font-bold mb-5">GymProDesk</h1>
         <nav>
           <ul className="space-y-2">
             <li>
