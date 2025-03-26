@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useState } from 'react';
-import { FiUsers, FiCreditCard, FiSettings, FiMoon, FiSun, FiHome } from 'react-icons/fi';
+import { FiUsers, FiCreditCard, FiSettings, FiMoon, FiSun, FiHome ,FiActivity } from 'react-icons/fi';
 import Dashboard from "./pages/Dashboard";
 import Members from "./pages/Members";
 import Subscriptions from "./pages/Subscriptions";
+import Statistics from "./pages/Statistics";
 import Settings from "./pages/Settings";
 import { FaBars } from "react-icons/fa";
 
@@ -47,6 +48,12 @@ const App: React.FC = () => {
       icon: <FiCreditCard />, 
       label: 'Subscriptions', 
       component: <Subscriptions darkMode={darkMode} /> 
+    },
+    { 
+      id: 'statistics', 
+      icon: <FiActivity />, 
+      label: 'Statistics', 
+      component: <Statistics darkMode={darkMode} /> 
     },
     { 
       id: 'settings', 
