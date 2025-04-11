@@ -357,7 +357,7 @@ const Subscriptions: React.FC<PageProps> = ({ darkMode }) => {
             )}
             {subscriptions.map((sub) => (
               <tr key={sub.id} className={`border-b transition-colors duration-150 ${darkMode ? "bg-gray-800 border-gray-700 hover:bg-gray-700/70" : "bg-white border-gray-200 hover:bg-gray-50"}`}>
-                <td className="px-6 py-4 font-medium whitespace-nowrap">{sub.name}</td>
+                <td className="px-6 py-4 font-bold whitespace-nowrap">{sub.name}</td>
                 <td className="px-6 py-4">{sub.duration_days}</td>
                 <td className="px-6 py-4">{sub.price}</td>
                 <td className="px-6 py-4 text-right">
