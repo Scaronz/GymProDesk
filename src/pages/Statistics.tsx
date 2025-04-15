@@ -245,34 +245,5 @@ const StatCard: FC<StatCardProps> = ({ darkMode, title, value, bgColor, darkBgCo
   </div>
 );
 
-// Gender Distribution Component (Kept for potential future use, but not used by Pie charts)
-/* // If you decide you need the pill display elsewhere, keep this
-interface GenderPillProps {
-    darkMode: boolean;
-    gender: 'Male' | 'Female';
-    count: number;
-    total: number;
-}
-const GenderPill: FC<GenderPillProps> = ({ darkMode, gender, count, total }) => {
-  const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : "0";
-  return (
-    <div className={`flex-1 p-4 rounded-lg ${darkMode ? 'bg-gray-600' : 'bg-white'}`}>
-      <div className="flex justify-between items-center mb-2">
-        <span className={`font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{gender}</span>
-        <span className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{count}</span>
-      </div>
-      <div className={`w-full bg-opacity-20 rounded-full h-2 ${darkMode ? 'bg-gray-400' : 'bg-gray-300'}`}>
-        <div
-          className={`h-2 rounded-full ${gender === 'Male' ? 'bg-blue-500' : 'bg-pink-500'}`}
-          style={{ width: `${percentage}%` }}
-        ></div>
-      </div>
-    </div>
-  );
-};
-*/
-
-// Age Group Component is no longer needed as it's replaced by the Pie chart.
-// const AgeGroup = ({ darkMode, label, count }: any) => ( ... );
 
 export default Statistics;
